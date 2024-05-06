@@ -11,9 +11,9 @@ const userSchema = new Schema(
       required: true,
       type: String,
     },
-    institutions: {
+    admin: {
       required: true,
-      type: Array,
+      type: Boolean,
     },
   },
   { timestamps: true },

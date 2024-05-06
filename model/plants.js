@@ -10,6 +10,10 @@ const plantSchema = new Schema(
       required: true,
       type: String,
     },
+    price: {
+      required: true,
+      type: Number,
+    },
   },
   { timestamps: true },
 );

@@ -1,4 +1,4 @@
-import UsersModel from '../model/users.js';
+import UsersModel from '../model/users';
 import { compare } from 'bcrypt';
 import jwt from 'jsonwebtoken';
 const secretKey = 'your_secret_key';
