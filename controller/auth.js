@@ -1,4 +1,4 @@
-import UsersModel from '../model/users';
+import UserModel from '../model/users.js';
 import { compare } from 'bcrypt';
 import jwt from 'jsonwebtoken';
 const secretKey = 'your_secret_key';
@@ -6,12 +6,12 @@ const secretKey = 'your_secret_key';
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await UsersModel.getByEmail(email);
+    const user = await UserModel.getByEmail(email);
 
     if (!user || !(await compare(password, user.password))) {
       return res.status(401).json({
         status: 401,
-        error: "User don't match email and password",
+        error: "User don't match email or password",
       });
     }
     const payload = {

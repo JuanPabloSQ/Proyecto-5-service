@@ -7,8 +7,7 @@ import 'dotenv/config';
 
 import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.js';
-import clientsRouter from './routes/clients.js';
-import institutionsRouter from './routes/institutions.js';
+import plantsRouter from './routes/plants.js';
 import authRouter from './routes/auth.js';
 import initDb from './model/db.js';
 import path from 'path';
@@ -16,9 +15,12 @@ import { fileURLToPath } from 'url';
 
 const app = express();
 
-const corsOptions = app.get('env') === 'development' ? {} : {
-  origin: process.env.WEB_UI_URL,
-}
+const corsOptions =
+  app.get('env') === 'development'
+    ? {}
+    : {
+        origin: process.env.WEB_UI_URL,
+      };
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -35,8 +37,7 @@ app.use(cookieParser());
 // Routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/clients', clientsRouter);
-app.use('/institutions', institutionsRouter);
+app.use('/plants', plantsRouter);
 app.use('/auth', authRouter);
 
 // TESTO DE ERRORES

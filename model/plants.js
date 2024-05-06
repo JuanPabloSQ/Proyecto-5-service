@@ -33,7 +33,9 @@ const getByIds = async (ids) => {
 };
 
 const create = async (plantData) => {
+  console.log('plantdata', plantData);
   const newPlant = new PlantModel(plantData);
+  console.log('plantmodel', newPlant);
   return newPlant.save();
 };
 

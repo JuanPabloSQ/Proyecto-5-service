@@ -1,5 +1,4 @@
 import UserModel from '../model/users.js';
-import InstitutionModel from '../model/institutions.js';
 import { check, validationResult } from 'express-validator';
 import { generateHash } from '../utils/auth.js';
 
@@ -43,6 +42,11 @@ const create = [
     .withMessage(
       'Password must include numbers, uppercase and lowercase letters, no special characters allowed',
     ),
+  check('admin')
+    .notEmpty()
+    .withMessage('Admin cannot be empty')
+    .isBoolean()
+    .withMessage('Admin field must be boolean'),
 
   async (req, res) => {
     try {
@@ -51,8 +55,8 @@ const create = [
         return res.status(400).json({ errors: errors.array() });
       }
 
-      const { email, password, institutions } = req.body;
-
+      const { email, password, admin } = req.body;
+      console.log('req', req.body);
       const existingUser = await UserModel.getByEmail(email);
 
       if (existingUser) {
@@ -60,21 +64,13 @@ const create = [
           .status(400)
           .json({ status: 400, error: 'Email already exists' });
       }
-      const existingInstitutions =
-        await InstitutionModel.getByIds(institutions);
-
-      if (existingInstitutions.length !== institutions.length) {
-        return res
-          .status(404)
-          .json({ status: 404, error: "Institution doesn't exist" });
-      }
 
       await UserModel.create({
+        admin,
         email,
         password: await generateHash(password),
-        institutions,
       });
-      return res.status(201).json({ status: 201, message: 'User Create' });
+      return res.status(201).json({ status: 201, message: 'User Created' });
     } catch (error) {
       console.error(error);
       return res
