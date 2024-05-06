@@ -70,6 +70,7 @@ const create = [
         email,
         password: await generateHash(password),
       });
+      console.log('admin', admin);
       return res.status(201).json({ status: 201, message: 'User Created' });
     } catch (error) {
       console.error(error);
