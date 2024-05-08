@@ -28,7 +28,7 @@ const getById = async (req, res) => {
 
 const create = async (req, res) => {
   try {
-    const plantData = req.body.data;
+    const plantData = req.body;
 
     const createdPlant = await PlantModel.create(plantData);
 
