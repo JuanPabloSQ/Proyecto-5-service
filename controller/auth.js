@@ -11,7 +11,7 @@ const login = async (req, res) => {
     if (!user || !(await compare(password, user.password))) {
       return res.status(401).json({
         status: 401,
-        error: "User don't match email or password",
+        error: 'Invalid email or password',
       });
     }
     const payload = {
@@ -20,7 +20,11 @@ const login = async (req, res) => {
       exp: Math.floor(Date.now() / 1000) + 8 * 60 * 60,
     };
     const token = jwt.sign(payload, secretKey);
-    return res.status(200).json({ token });
+
+    return res.status(200).json({
+      token: token,
+      userId: user._id,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ status: 500, error: 'Internal Server Error' });
