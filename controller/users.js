@@ -55,7 +55,7 @@ const create = [
         return res.status(400).json({ errors: errors.array() });
       }
 
-      const { email, password, admin } = req.body;
+      const { email, password, admin, name } = req.body;
       console.log('req', req.body);
       const existingUser = await UserModel.getByEmail(email);
 
@@ -69,6 +69,7 @@ const create = [
         admin,
         email,
         password: await generateHash(password),
+        name,
       });
       console.log('admin', admin);
       return res.status(201).json({ status: 201, message: 'User Created' });
