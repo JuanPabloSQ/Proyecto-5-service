@@ -8,6 +8,7 @@ import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.js';
 import plantsRouter from './routes/plants.js';
 import authRouter from './routes/auth.js';
+import mercadopagoRouter from './routes/mercadopago.js';
 import initDb from './model/db.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -38,6 +39,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/plants', plantsRouter);
 app.use('/auth', authRouter);
+app.use('/mercadopago', mercadopagoRouter);
 
 // TESTO DE ERRORES
 app.use('/force-error', (req, res, next) => {
