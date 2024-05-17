@@ -30,17 +30,17 @@ const getById = async (req, res) => {
 const create = [
   check('email')
     .notEmpty()
-    .withMessage('Email cannot be empty')
+    .withMessage('Correo no puede estar vacia')
     .isEmail()
-    .withMessage('Must be a valid email'),
+    .withMessage('El correo debeo ser un email valido'),
   check('password')
     .notEmpty()
-    .withMessage('Password cannot be empty')
+    .withMessage('La clave no puede estar vacia')
     .isLength({ min: 8 })
-    .withMessage('Password must be at least 8 characters long')
+    .withMessage('La clave debe tener 8 caracteres ')
     .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)
     .withMessage(
-      'Password must include numbers, uppercase and lowercase letters, no special characters allowed',
+      'La clave debe incluir numeros, mayuscula, minusculas y ningun caracter especial',
     ),
   check('admin')
     .notEmpty()
