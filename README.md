@@ -6,11 +6,11 @@ El backend de "VerdeVida Huerto-service" es una API RESTful desarrollada utiliza
 
 ## Instrucciones de depliegue
 
-1. **Clonar el repositorio**
+- **Clonar el repositorio**
 
-   ```bash
-   git clone https://github.com/JuanPabloSQ/Proyecto-5-service
-   ```
+  ```bash
+  git clone https://github.com/JuanPabloSQ/Proyecto-5-service
+  ```
 
 ## Tecnologias utilizadas
 
