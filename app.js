@@ -30,8 +30,8 @@ const corsOptions = {
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
-  preflightContinue: false, // Permite al servidor manejar la solicitud OPTIONS por sí mismo
-  optionsSuccessStatus: 204, // Algunos navegadores (por ejemplo, IE11, algunos SmartTVs) manejan 204 de manera incorrecta
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
 };
 
 const __filename = fileURLToPath(import.meta.url);
@@ -46,32 +46,26 @@ app.use(json({ limit: '50mb', extended: true }));
 app.use(urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// Routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/plants', plantsRouter);
 app.use('/auth', authRouter);
 app.use('/mercadopago', mercadopagoRouter);
 
-// TESTO DE ERRORES
 app.use('/force-error', (req, res, next) => {
   const error = new Error('Forced Internal Server Error');
   error.status = 500;
   next(error);
 });
 
-// catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
 });
 
-// error handler
 app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
   res.status(err.status || 500);
   res.render('error');
 });
