@@ -27,6 +27,11 @@ const corsOptions = {
       callback(new Error('Not allowed by CORS'));
     }
   },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  preflightContinue: false, // Permite al servidor manejar la solicitud OPTIONS por sí mismo
+  optionsSuccessStatus: 204, // Algunos navegadores (por ejemplo, IE11, algunos SmartTVs) manejan 204 de manera incorrecta
 };
 
 const __filename = fileURLToPath(import.meta.url);
