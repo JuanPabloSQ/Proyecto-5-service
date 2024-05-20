@@ -1,4 +1,3 @@
-import createError from 'http-errors';
 import express, { json, urlencoded } from 'express';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
@@ -15,12 +14,20 @@ import { fileURLToPath } from 'url';
 
 const app = express();
 
-const corsOptions =
-  app.get('env') === 'development'
-    ? {}
-    : {
-        origin: process.env.WEB_UI_URL,
-      };
+const allowedOrigins = [
+  'https://juanpablosq.github.io',
+  'http://localhost:5173',
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
